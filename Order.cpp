@@ -97,11 +97,3 @@ const string& Order::getExecStatus() const {
 void Order::setExecStatus(const string& ExecStatus) {
     execStatus = ExecStatus;
 }
-
-
-
-
-
-
-
-
