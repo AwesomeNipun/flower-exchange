@@ -5,9 +5,12 @@
 #ifndef FLOWER_EXCHANGE_EXCHANGEAPP_H
 #define FLOWER_EXCHANGE_EXCHANGEAPP_H
 
+#include <string>
+
+using namespace std;
 
 class ExchangeApp {
-
+    static void execute(string inputFile, string outputFile);
 };
 
 

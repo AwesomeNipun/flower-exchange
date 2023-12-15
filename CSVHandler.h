@@ -13,8 +13,8 @@
 
 class CSVHandler {
 
+public:
     static vector<Order> readCSV(const string &filename);
-
     static void writeToCSV(const string &filename, vector<Order> &orders);
 };
 
