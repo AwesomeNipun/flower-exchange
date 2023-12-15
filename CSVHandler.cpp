@@ -21,6 +21,8 @@ vector<Order> CSVHandler::readCSV(const string &filename){
     vector<Order> orders;
     string line;
 
+    getline(inputFile, line);
+
     while (getline(inputFile, line)) {
         Order order;
 

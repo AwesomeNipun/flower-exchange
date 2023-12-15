@@ -20,15 +20,16 @@ void ExchangeApp::execute(string inputFile, string outputFile){
     cout << "\nReading CSV files to get the orders..." << endl;
     vector<Order> orders = CSVHandler::readCSV(inputFile);
 
+    cout << "\nValidating orders..." << endl;
     Validator::validateOrder(orders);
 
     ExecutionReport executionReport;
 
-    OrderBook roseOB((string &) "Rose");
-    OrderBook lavenderOB((string &) "Lavender");
-    OrderBook lotusOB((string &) "Lotus");
-    OrderBook tulipOB((string &) "Tulip");
-    OrderBook orchidOB((string &) "Orchid");
+    OrderBook roseOB( "Rose");
+    OrderBook lavenderOB("Lavender");
+    OrderBook lotusOB("Lotus");
+    OrderBook tulipOB("Tulip");
+    OrderBook orchidOB("Orchid");
 
     cout << "\nProcessing the orders..." << endl;
     for (size_t i = 0; i < orders.size(); i++) {
