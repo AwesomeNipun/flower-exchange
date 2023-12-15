@@ -14,6 +14,8 @@ Order::Order(const string& ClientOrderID, const string& Instrument, int Side, in
     price = Price;
 }
 
+Order::Order() {}
+
 // setters and getters
 
 const string& Order::getClientOrderID() const {

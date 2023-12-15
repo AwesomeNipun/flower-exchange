@@ -24,6 +24,7 @@ private:
     string orderID;
 
 public:
+    Order();
     Order(const string &ClientOrderID, const string &Instrument, int Side, int Quantity, double Price);
 
     const string &getClientOrderID() const;
