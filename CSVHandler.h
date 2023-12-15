@@ -13,7 +13,7 @@
 
 class CSVHandler {
 
-    static std::vector<Order> readCSV(const std::__cxx11::basic_string<char> &filename);
+    static vector<Order> readCSV(const string &filename);
 
     static void writeToCSV(const string &filename, vector<Order> &orders);
 };
