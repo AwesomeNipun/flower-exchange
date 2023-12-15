@@ -14,6 +14,7 @@ private:
     vector<Order> executionReport;
 public:
     void setExecutionReport(vector<Order> &executions);
+    void addToReport(Order order);
 
     vector<Order> &getExecutionReport();
 };
