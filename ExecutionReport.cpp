@@ -11,3 +11,7 @@ void ExecutionReport::setExecutionReport(vector<Order> &Executions) {
 vector<Order> &ExecutionReport::getExecutionReport()  {
     return executionReport;
 }
+
+void ExecutionReport::addToReport(Order order) {
+    executionReport.push_back(order);
+}

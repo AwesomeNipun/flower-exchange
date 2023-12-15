@@ -17,6 +17,11 @@ private:
     vector<Order> buyOrders;
     vector<Order> sellOrders;
 
+    // constants to keep the execution status
+    static constexpr const char* NEW = "New";
+    static constexpr const char* FILL = "Fill";
+    static constexpr const char* PFILL = "PFill";
+
 public:
     OrderBook(const string& instrument);
     static bool compareBuy(Order& od1, Order& od2);
