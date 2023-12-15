@@ -10,6 +10,7 @@
 using namespace std;
 
 class ExchangeApp {
+public:
     static void execute(string inputFile, string outputFile);
 };
 

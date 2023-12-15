@@ -1,0 +1,12 @@
+# ninja log v5
+64	1079	7243553957858050	CMakeFiles/flower_exchange.dir/ExchangeApp.cpp.obj	763dd769f727ed74
+108	1790	7243553968435786	CMakeFiles/flower_exchange.dir/Order.cpp.obj	2a036e39ba7434ae
+84	1955	7243553969711723	CMakeFiles/flower_exchange.dir/Validator.cpp.obj	90b9ab7f4e8c68e2
+96	2174	7243553971986649	CMakeFiles/flower_exchange.dir/ExecutionReport.cpp.obj	a9b6c3b05346cca7
+55	2275	7243553973084068	CMakeFiles/flower_exchange.dir/CSVHandler.cpp.obj	a4df5f50b0ae61e7
+75	2558	7243553975772898	CMakeFiles/flower_exchange.dir/OrderBook.cpp.obj	39b3cda2d14d242c
+28	1342	7243554434574303	CMakeFiles/flower_exchange.dir/CSVHandler.cpp.obj	a4df5f50b0ae61e7
+18	1343	7243554434554153	CMakeFiles/flower_exchange.dir/ExchangeApp.cpp.obj	763dd769f727ed74
+9	1133	7243580162611805	CMakeFiles/flower_exchange.dir/main.cpp.obj	b0a579045604194a
+26	1491	7243580166867736	CMakeFiles/flower_exchange.dir/ExchangeApp.cpp.obj	763dd769f727ed74
+1491	2012	7243580171237455	flower_exchange.exe	ba910820b6e6b64c
