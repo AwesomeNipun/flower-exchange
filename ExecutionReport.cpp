@@ -3,3 +3,11 @@
 //
 
 #include "ExecutionReport.h"
+
+void ExecutionReport::setExecutionReport(vector<Order> &Executions) {
+    ExecutionReport::executionReport = Executions;
+}
+
+vector<Order> &ExecutionReport::getExecutionReport()  {
+    return executionReport;
+}
