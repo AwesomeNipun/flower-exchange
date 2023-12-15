@@ -5,9 +5,17 @@
 #ifndef FLOWER_EXCHANGE_EXECUTIONREPORT_H
 #define FLOWER_EXCHANGE_EXECUTIONREPORT_H
 
+# include "Order.h"
+# include <vector>
+using namespace std;
 
 class ExecutionReport {
+private:
+    vector<Order> executionReport;
+public:
+    void setExecutionReport(vector<Order> &executions);
 
+    vector<Order> &getExecutionReport();
 };
 
 
