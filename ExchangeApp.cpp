@@ -13,9 +13,9 @@
 using namespace std;
 
 void ExchangeApp::execute(string inputFile, string outputFile){
-    cout << "\n============================\n" << endl;
-    cout << "Starting the exchange app...\n" << endl;
-    cout << "============================\n" << endl;
+    cout << "============================" << endl;
+    cout << "Starting the exchange app..." << endl;
+    cout << "============================" << endl;
 
     cout << "\nReading CSV files to get the orders..." << endl;
     vector<Order> orders = CSVHandler::readCSV(inputFile);
@@ -54,15 +54,15 @@ void ExchangeApp::execute(string inputFile, string outputFile){
         }
     }
 
-    cout<< "OrderID   |   ClientOrderID   |   Instrument   |   Side   |   Status   |   Quantity   |   Price   |   Reason   |   TransactionTime" << endl;
+    cout<< "\nOrderID | ClientOrderID | Instrument | Side | Status | Quantity | Price | Reason | TransactionTime" << endl;
     for (size_t i = 0; i < executionReport.getExecutionReport().size(); i++) {
         cout << executionReport.getExecutionReport()[i].getOrderID() << " "<< executionReport.getExecutionReport()[i].getClientOrderID() << " " << executionReport.getExecutionReport()[i].getInstrument() << " " << executionReport.getExecutionReport()[i].getSide() << " " << executionReport.getExecutionReport()[i].getExecStatus() << " " << executionReport.getExecutionReport()[i].getQuantity() << " " << executionReport.getExecutionReport()[i].getPrice() << " " << executionReport.getExecutionReport()[i].getReason() << " " << executionReport.getExecutionReport()[i].getTransactTime() << endl;
     }
 
-    cout << "\nWriting the executed orders to the output CSV file..." << endl;
+    cout << "\nWriting the executed orders to the output CSV file...\n" << endl;
     CSVHandler::writeToCSV(outputFile, executionReport.getExecutionReport());
 
-    cout << "\n============================\n" << endl;
-    cout << "Exchange process completed...\n" << endl;
-    cout << "============================\n" << endl;
+    cout << "============================" << endl;
+    cout << "Exchange process completed..." << endl;
+    cout << "============================" << endl;
 }
