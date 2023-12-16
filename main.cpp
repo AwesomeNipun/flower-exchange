@@ -19,8 +19,8 @@ int main()
 
     // for a single example
 
-     string filename = R"(..\Inputs\example_6.csv)";
-     string output = R"(..\Outputs\example_6.csv)";
+     string filename = R"(..\Inputs\example_9.csv)";
+     string output = R"(..\Outputs\example_9.csv)";
      ExchangeApp::execute(filename, output);
 
     return 0;

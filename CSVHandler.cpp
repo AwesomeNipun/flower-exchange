@@ -28,8 +28,8 @@ vector<Order> CSVHandler::readCSV(const string &filename){
 
         stringstream ss(line);
         string clientOrderID, instrument, strSide, strQuantity, strPrice;
-        int side, quantity;
-        double price;
+        int side = 0, quantity =0;
+        double price =0.0;
 
         getline(ss, clientOrderID, ',');
         getline(ss, instrument, ',');
@@ -37,9 +37,9 @@ vector<Order> CSVHandler::readCSV(const string &filename){
         getline(ss, strQuantity, ',');
         getline(ss, strPrice, ',');
 
-        side = stoi(strSide);
-        quantity = stoi(strQuantity);
-        price = stod(strPrice);
+        if (!(strSide=="")) side = stoi(strSide);
+        if (!(strQuantity=="")) quantity = stoi(strQuantity);
+        if (!(strPrice=="")) price = stod(strPrice);
 
         order.setClientOrderID(clientOrderID);
         order.setInstrument(instrument);
