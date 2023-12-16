@@ -14,8 +14,8 @@ using namespace std;
 class OrderBook {
 private:
     string instrument;
-    vector<Order> buyOrders;
-    vector<Order> sellOrders;
+    vector<Order> requestedBuys;
+    vector<Order> requestedSells;
 
     // constants to keep the execution status
     static constexpr const char* NEW = "New";

@@ -9,9 +9,19 @@ using namespace std;
 
 int main()
 {
-    string filename = R"(..\Inputs\example_1.csv)";
-    string output = R"(..\Outputs\example_1.csv)";
-    ExchangeApp::execute(filename, output);
+
+    // for all the examples
+//    for (int i = 1; i <= 8; i++) {
+//        string filename = R"(..\Inputs\example_)" + to_string(i) + ".csv";
+//        string output = R"(..\Outputs\example_)" + to_string(i) + ".csv";
+//        ExchangeApp::execute(filename, output);
+//    }
+
+    // for a single example
+
+     string filename = R"(..\Inputs\example_6.csv)";
+     string output = R"(..\Outputs\example_6.csv)";
+     ExchangeApp::execute(filename, output);
 
     return 0;
 }

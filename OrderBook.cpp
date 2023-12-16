@@ -26,22 +26,21 @@ void OrderBook::addOrderToExecutionReport(Order order, ExecutionReport &executio
     int side = order.getSide(); // get the side of the order
 
     if (side == 1) { // buy order
-        if (sellOrders.empty()) { // no sell orders, therefore buy order should be added as a passive order
+        if (requestedSells.empty()) { // no sell orders, therefore buy order should be added as a passive order
             order.setExecStatus(NEW);
-            buyOrders.push_back(order);
+            requestedBuys.push_back(order);
 
             order.setTransactTime(getTimestamp());
             executionReport.addToReport(order);
         }
         else { // if there are existing sell orders, we need to iterate and find if a buy can be done
-            int numSellOrders = sellOrders.size();
+            int numSellOrders = requestedSells.size();
             double buyPrice = order.getPrice();
             for (size_t i=0; i<numSellOrders; i++){
-                Order sellOrder = sellOrders[0];
+                Order sellOrder = requestedSells[0];
                 double sellPrice = sellOrder.getPrice();
                 if (buyPrice >= sellPrice){ // if the sell price is lower than or equal the buy price, the buy can happen
                     int remainQuantity = order.getQuantity() - sellOrder.getQuantity();
-
                     // remainQuantity > 0 --> buy - partial fill, sell - fill
                     // remainQuantity = 0 --> buy and sell both fill
                     // remainQuantity < 0 --> buy - fill, sell - partial fill
@@ -59,8 +58,8 @@ void OrderBook::addOrderToExecutionReport(Order order, ExecutionReport &executio
 
                         order.setPrice(buyPrice); // set back the buy price
                         order.setQuantity(remainQuantity);
-                        sellOrders.erase(sellOrders.begin());
-                        break;
+                        requestedSells.erase(requestedSells.begin());
+                        // this order can go in another iteration to buy more, hence no break
                     }
                     else if (remainQuantity == 0){
                         // transaction
@@ -74,7 +73,7 @@ void OrderBook::addOrderToExecutionReport(Order order, ExecutionReport &executio
                         executionReport.addToReport(sellOrder);
 
                         order.setPrice(buyPrice); // set back the buy price
-                        sellOrders.erase(sellOrders.begin());
+                        requestedSells.erase(requestedSells.begin());
                         break;
                     }
                     else{
@@ -91,47 +90,49 @@ void OrderBook::addOrderToExecutionReport(Order order, ExecutionReport &executio
 
                         order.setPrice(buyPrice); //set back the buy price
                         sellOrder.setQuantity(-remainQuantity);
-
-                        // this order can go in another iteration to buy more, hence no break
+                        break;
                     }
                 }
                 else{   // if the sell price is larger than buy price, order cannot be processed at this time
 
                     if (i > 0) {    // order has been already processed at least once
-                        buyOrders.push_back(order);
+                        requestedBuys.push_back(order);
                         break;
                     }
                     order.setExecStatus(NEW);
-                    buyOrders.push_back(order);
+                    requestedBuys.push_back(order);
                     order.setTransactTime(getTimestamp());
                     executionReport.addToReport(order);
                     break;
 
                 }
             }
+
+            // after the loop if the order is partially filled, it should be added to the buy orders
+            if(order.getExecStatus() == PFILL){
+                requestedBuys.push_back(order);
+            }
         }
         // after execution of an order, we will sort the orders based on the price
-        std::sort(buyOrders.begin(), buyOrders.end(), compareBuy);
+        std::sort(requestedBuys.begin(), requestedBuys.end(), compareBuy);
     }
     else{ // sell order
-        if (buyOrders.empty()) {  // no buy orders, therefore buy order should be added as a passive order
+        if (requestedBuys.empty()) {  // no buy orders, therefore buy order should be added as a passive order
             order.setExecStatus(NEW);
-            sellOrders.push_back(order);
+            requestedSells.push_back(order);
 
             order.setTransactTime(getTimestamp());
             executionReport.addToReport(order);
         }
         else { // if there are existing buy orders, we need to iterate and find if a sell can be done
-            int numBuyOrders = buyOrders.size();
+            int numBuyOrders = requestedBuys.size();
             double sellPrice = order.getPrice();
 
             for (size_t i=0; i<numBuyOrders; i++) {
-                Order buyOrder = buyOrders[0];
+                Order buyOrder = requestedBuys[0];
                 double buyPrice = buyOrder.getPrice();
-                if (sellPrice <=
-                    buyPrice) { // if the buy price is greater than or equal the sell price, the sell can happen
+                if (sellPrice <= buyPrice) { // if the buy price is greater than or equal the sell price, the sell can happen
                     int remainQuantity = order.getQuantity() - buyOrder.getQuantity();
-
                     // remainQuantity > 0 --> sell - partial fill, buy - fill
                     // remainQuantity = 0 --> buy and sell both fill
                     // remainQuantity < 0 --> sell - fill, buy - partial fill
@@ -149,8 +150,9 @@ void OrderBook::addOrderToExecutionReport(Order order, ExecutionReport &executio
 
                         order.setPrice(sellPrice); // set back the sell price
                         order.setQuantity(remainQuantity);
-                        buyOrders.erase(buyOrders.begin());
-                        break;
+                        requestedBuys.erase(requestedBuys.begin());
+
+                        // this order can go in another iteration to sell more, hence no break
                     } else if (remainQuantity == 0) {
                         // transaction
                         order.setExecStatus(FILL);
@@ -163,7 +165,7 @@ void OrderBook::addOrderToExecutionReport(Order order, ExecutionReport &executio
                         executionReport.addToReport(buyOrder);
 
                         order.setPrice(sellPrice); // set back the sell price
-                        buyOrders.erase(buyOrders.begin());
+                        requestedBuys.erase(requestedBuys.begin());
                         break;
                     } else {
                         // transaction
@@ -179,26 +181,30 @@ void OrderBook::addOrderToExecutionReport(Order order, ExecutionReport &executio
 
                         order.setPrice(sellPrice); //set back the sell price
                         buyOrder.setQuantity(-remainQuantity);
-
-                        // this order can go in another iteration to sell more, hence no break
+                        break;
                     }
                 } else {   // if the sell price is larger than buy price, order cannot be processed at this time
 
                     if (i > 0) {    // order has been already processed at least once
-                        sellOrders.push_back(order);
+                        requestedSells.push_back(order);
                         break;
                     }
                     order.setExecStatus(NEW);
-                    sellOrders.push_back(order);
+                    requestedSells.push_back(order);
                     order.setTransactTime(getTimestamp());
                     executionReport.addToReport(order);
                     break;
 
                 }
             }
+
+            // after the loop, if the order is partially filled, it should be added to the sell orders
+            if(order.getExecStatus() == PFILL){
+                requestedSells.push_back(order);
+            }
         }
         // after execution of an order, we will sort the orders based on the price
-        std::sort(sellOrders.begin(), sellOrders.end(), compareSell);
+        std::sort(requestedSells.begin(), requestedSells.end(), compareSell);
     }
 }
 

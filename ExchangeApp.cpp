@@ -56,7 +56,15 @@ void ExchangeApp::execute(string inputFile, string outputFile){
 
     cout<< "\nOrderID | ClientOrderID | Instrument | Side | Status | Quantity | Price | Reason | TransactionTime" << endl;
     for (size_t i = 0; i < executionReport.getExecutionReport().size(); i++) {
-        cout << executionReport.getExecutionReport()[i].getOrderID() << " "<< executionReport.getExecutionReport()[i].getClientOrderID() << " " << executionReport.getExecutionReport()[i].getInstrument() << " " << executionReport.getExecutionReport()[i].getSide() << " " << executionReport.getExecutionReport()[i].getExecStatus() << " " << executionReport.getExecutionReport()[i].getQuantity() << " " << executionReport.getExecutionReport()[i].getPrice() << " " << executionReport.getExecutionReport()[i].getReason() << " " << executionReport.getExecutionReport()[i].getTransactTime() << endl;
+        cout << executionReport.getExecutionReport()[i].getOrderID() << " "<<
+        executionReport.getExecutionReport()[i].getClientOrderID() << " " <<
+        executionReport.getExecutionReport()[i].getInstrument() << " " <<
+        executionReport.getExecutionReport()[i].getSide() << " " <<
+        executionReport.getExecutionReport()[i].getExecStatus() << " " <<
+        executionReport.getExecutionReport()[i].getQuantity() << " " <<
+        executionReport.getExecutionReport()[i].getPrice() << " " <<
+        executionReport.getExecutionReport()[i].getReason() << " " <<
+        executionReport.getExecutionReport()[i].getTransactTime() << endl;
     }
 
     cout << "\nWriting the executed orders to the output CSV file...\n" << endl;
