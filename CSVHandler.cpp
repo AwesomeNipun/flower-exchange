@@ -37,9 +37,12 @@ vector<Order> CSVHandler::readCSV(const string &filename){
         getline(ss, strQuantity, ',');
         getline(ss, strPrice, ',');
 
-        if (!(strSide=="")) side = stoi(strSide);
-        if (!(strQuantity=="")) quantity = stoi(strQuantity);
-        if (!(strPrice=="")) price = stod(strPrice);
+        try {
+            if (!(strSide=="")) side = stoi(strSide);
+        } catch (std::invalid_argument& e){}
+
+            if (!(strQuantity=="")) quantity = stoi(strQuantity);
+            if (!(strPrice=="")) price = stod(strPrice);
 
         order.setClientOrderID(clientOrderID);
         order.setInstrument(instrument);
