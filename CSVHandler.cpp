@@ -37,18 +37,16 @@ vector<Order> CSVHandler::readCSV(const string &filename){
         getline(ss, strQuantity, ',');
         getline(ss, strPrice, ',');
 
-        try {
-            if (!(strSide=="")) side = stoi(strSide);
-        } catch (std::invalid_argument& e){}
-
-            if (!(strQuantity=="")) quantity = stoi(strQuantity);
-            if (!(strPrice=="")) price = stod(strPrice);
+        if (!(strSide=="")) side = stoi(strSide);
+        if (!(strQuantity=="")) quantity = stoi(strQuantity);
+        if (!(strPrice=="")) price = stod(strPrice);
 
         order.setClientOrderID(clientOrderID);
         order.setInstrument(instrument);
         order.setSide(side);
         order.setQuantity(quantity);
         order.setPrice(price);
+        order.setInputStrings({strSide, strPrice, strQuantity});
 
         orders.push_back(order);
     }
@@ -69,9 +67,9 @@ void CSVHandler::writeToCSV(const string &filename, vector<Order> &orders) {
                 << orders[i].getClientOrderID() << ","
                 << orders[i].getOrderID() << ","
                 << orders[i].getInstrument() << ","
-                << orders[i].getSide() << ","
-                << orders[i].getPrice() << ","
-                << orders[i].getQuantity() << ","
+                << (orders[i].getExecStatus() == "Reject" ? orders[i].getInputStrings()[0] : to_string(orders[i].getSide())) << ","
+                << (orders[i].getExecStatus() == "Reject" ? orders[i].getInputStrings()[1] : to_string(orders[i].getPrice())) << ","
+                << (orders[i].getExecStatus() == "Reject" ? orders[i].getInputStrings()[2] : to_string(orders[i].getQuantity())) << ","
                 << orders[i].getExecStatus() << ","
                 << orders[i].getReason() << ","
                 << orders[i].getTransactTime() << endl;

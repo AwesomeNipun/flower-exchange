@@ -8,6 +8,7 @@
 #include <iostream>
 using namespace std;
 #include <string>
+#include <vector>
 
 class Order {
 private:
@@ -22,6 +23,8 @@ private:
     string reason;
     string execStatus;
     string orderID;
+    // array to store the string values of side, price and quantity
+    vector<string> inputStrings;
 
 public:
     Order();
@@ -37,6 +40,7 @@ public:
     const string &getReason() const;
     const string &getOrderID() const;
     const string &getExecStatus() const;
+    vector <string> &getInputStrings();
 
     void setClientOrderID(const string &ClientOrderID);
     void setInstrument(const string &Instrument);
@@ -48,6 +52,7 @@ public:
     void setReason(const string &Reason);
     void setOrderID(const string &OrderID);
     void setExecStatus(const string &ExecStatus);
+    void setInputStrings(const vector <string> &InputStrings);
 };
 
 #endif //FLOWER_EXCHANGE_ORDER_H

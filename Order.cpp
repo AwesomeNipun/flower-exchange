@@ -97,3 +97,11 @@ const string& Order::getExecStatus() const {
 void Order::setExecStatus(const string& ExecStatus) {
     execStatus = ExecStatus;
 }
+
+vector<string>& Order::getInputStrings() {
+    return inputStrings;
+}
+
+void Order::setInputStrings(const vector<string>& InputStrings) {
+    inputStrings = InputStrings;
+}

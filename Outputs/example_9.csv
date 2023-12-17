@@ -1,11 +1,11 @@
 ClientOrderID, OrderID, Instrument, Side, Price, Quantity, Status, Reason,TransactionTime
-aa13,ord1,Rose,1,55,100,New,,20231217-195057.480
-aa14,ord2,Rose,1,55,0,Reject,Invalid Quantity,
+aa13,ord1,Rose,1,55.000000,100,New,,20231217-201407.623
+aa14,ord2,Rose,1,55,,Reject,Invalid Quantity,
 aa15,ord3,Rose,1,-24,100,Reject,Invalid Price,
-aa16,ord4,Rose,1,65.99,100,New,,20231217-195057.482
-aa17,ord5,Rose,2,65.99,100,PFill,,20231217-195057.482
-aa16,ord4,Rose,1,65.99,100,Fill,,20231217-195057.482
-aa17,ord5,Rose,2,55,100,PFill,,20231217-195057.482
-aa13,ord1,Rose,1,55,100,Fill,,20231217-195057.482
-aa18,ord6,Rose,1,1,100,Fill,,20231217-195057.482
-aa17,ord5,Rose,2,1,100,Fill,,20231217-195057.482
+aa16,ord4,Rose,1,65.990000,100,New,,20231217-201407.625
+aa17,ord5,Rose,2,65.990000,100,PFill,,20231217-201407.625
+aa16,ord4,Rose,1,65.990000,100,Fill,,20231217-201407.625
+aa17,ord5,Rose,2,55.000000,100,PFill,,20231217-201407.625
+aa13,ord1,Rose,1,55.000000,100,Fill,,20231217-201407.625
+aa18,ord6,Rose,1,1.000000,100,Fill,,20231217-201407.625
+aa17,ord5,Rose,2,1.000000,100,Fill,,20231217-201407.625
